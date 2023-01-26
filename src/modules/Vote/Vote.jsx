@@ -14,21 +14,7 @@ class Vote extends Component {
         bad: 0
     }
 
-    countTotalFeedback() {
-        const { good, neutral, bad } = this.state;
-        const total = good + neutral + bad;
-        return total;
-    }
 
-    countPositiveFeedbackPercentage() {
-        const total = this.countTotalFeedback();
-        if (!total) {
-            return 0;
-        }
-        const good = this.state.good;
-        const percent = ((good / total) * 100).toFixed(2);
-        return Number(percent);
-    }
 
     // increaseGoogVate = () => {
     //     this.setState(prevState => {
@@ -52,10 +38,26 @@ class Vote extends Component {
         })
     }
 
+    countTotalFeedback() {
+        const { good, neutral, bad } = this.state;
+        const total = good + neutral + bad;
+        return total;
+    }
+
+    countPositiveFeedbackPercentage() {
+        const total = this.countTotalFeedback();
+        if (!total) {
+            return 0;
+        }
+        const good = this.state.good;
+        const percent = ((good / total) * 100).toFixed(2);
+        return Number(percent);
+    }
+
     render() {
         const { good, neutral, bad } = this.state;
         const total = this.countTotalFeedback();
-        const percent = this.countPositiveFeedbackPercentage();
+        const positivePercentage = this.countPositiveFeedbackPercentage();
         const key = Object.keys(this.state);
         return (
             <div>
@@ -73,7 +75,7 @@ class Vote extends Component {
                                 neutral={neutral}
                                 bad={bad}
                                 total={total}
-                                positivePercentage={percent}
+                                positivePercentage={positivePercentage}
                             />
                         </Section>
                     )}
