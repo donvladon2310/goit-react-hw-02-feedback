@@ -4,7 +4,7 @@ import FeedbackOptions from "./FeedbackOptions/FeedbackOptions";
 import Statistics from "./VoteStatistics/Statistics";
 import Section from "./Section/Section";
 
-import styles from "./vote.module.css"
+
 
 class Vote extends Component {
     state = {
@@ -55,13 +55,13 @@ class Vote extends Component {
         const { good, neutral, bad } = this.state;
         const total = this.countTotalFeedback();
         const percent = this.countPositiveFeedbackPercentage();
-
+        const key = Object.keys(this.state);
         return (
             <div>
                 <h3>Please leave feedback </h3>
                 <div>
                     <Section title="Variants">
-                        <FeedbackOptions onLeaveFeedback={this.leaveVote} />
+                        <FeedbackOptions onLeaveFeedback={this.leaveVote} options={key} />
                     </Section>
                     <Section title="Results">
                         <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={percent} />
